@@ -63,7 +63,7 @@ for syscall in sorted(syscalls.keys()):
         continue
     new_content  = re.sub(regex, subst, content, 0, re.MULTILINE)
     if  new_content is content :
-        print("Syscall not found in the template:", syscall, regex, subst)
+        print("Syscall not found in the template:", syscall)
     #else : 
         #print("Found:", syscall, regex, subst)
     content  = new_content
