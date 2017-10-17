@@ -6,6 +6,7 @@ import datetime
 import io
 import os
 import re
+import sys
 
 syscalls = collections.OrderedDict()
 
@@ -44,28 +45,33 @@ for arch in sorted(present_archs):
         archs.append(arch)
 
 os.chdir('..')
-
-with open ('template_syscalls.c', 'r' ) as f:
+if sys.argv[1] == '32' :
+    template = 'arm_syscalls.c'
+elif sys.argv[1] == '64' :
+    template = 'aarch64_syscalls.c'
+with open (template, 'r' ) as f:
     content = f.read()
 
-arc = "mips64"
+arc = sys.argv[2]
 
 content  = content.replace("TEMPLATE_ARCH", arc)
 
 for syscall in sorted(syscalls.keys()):
+    #print(syscall)
     regex = ""
     subst =""
     try : 
-        regex = "\{\"" +syscall+ "\"(\s*,\s*)TEMPLATE_NUM"
-        subst = "\"" +syscall+ "\"\\1 " + str((syscalls[syscall])[arc])
+        regex = r"\{\"" +syscall+ "\"(\s*,\s*)TEMPLATE_NUM"
+        subst = "{\"" +syscall+ "\"\\1 "+str((syscalls[syscall])[arc])
+        # str((syscalls[syscall])[arc])
     except :
         pass
         continue
     new_content  = re.sub(regex, subst, content, 0, re.MULTILINE)
     if  new_content is content :
         print("Syscall not found in the template:", syscall)
-    #else : 
-        #print("Found:", syscall, regex, subst)
+    else : 
+        print("Found:", syscall)
     content  = new_content
 
 output_file = open(arc + '_syscalls.c', 'w')

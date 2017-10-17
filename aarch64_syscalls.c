@@ -46,12 +46,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"upeer_sockaddr", 8},
              [ARG_2] = {"upeer_addrlen", 8}, [ARG_3] = {"flags", 4},
      }},
-    {"access",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"mode", 4},
-     }},
     {"acct",
      TEMPLATE_NUM,
      NORMAL,
@@ -71,19 +65,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      NORMAL,
      {
              [ARG_0] = {"txc_p", 8},
-     }},
-    {"afs_syscall", TEMPLATE_NUM, NORMAL, {}},  // Unimplemented system call
-    {"alarm",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"seconds", 4},
-     }},
-    {"arch_prctl",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"code", 4}, [ARG_1] = {"addr", 8},
      }},
     {"bind",
      TEMPLATE_NUM,
@@ -122,19 +103,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      NORMAL,
      {
              [ARG_0] = {"filename", 8},
-     }},
-    {"chmod",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"mode", 2},
-     }},
-    {"chown",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"user", 4},
-             [ARG_2] = {"group", 4},
      }},
     {"chroot",
      TEMPLATE_NUM,
@@ -195,25 +163,13 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_2] = {"addrlen", 4},
      }},
     {"copy_file_range",
-     TEMPLATE_NUM,
+     285,
      NORMAL,
      {
              [ARG_0] = {"fd_in", 4}, [ARG_1] = {"off_in", 8},
              [ARG_2] = {"fd_out", 4}, [ARG_3] = {"off_out", 8},
              [ARG_4] = {"len", 8}, [ARG_5] = {"flags", 4},
      }},
-    {"creat",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"pathname", 8}, [ARG_1] = {"mode", 2},
-     }},
-    {"create_module",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"name", 8}, [ARG_1] = {"size", 8},
-     }},  // only in kernels before Linux 2.6
     {"delete_module",
      TEMPLATE_NUM,
      NORMAL,
@@ -226,24 +182,12 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"fildes", 4},
      }},
-    {"dup2",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"oldfd", 4}, [ARG_1] = {"newfd", 4},
-     }},
     {"dup3",
      TEMPLATE_NUM,
      NORMAL,
      {
              [ARG_0] = {"oldfd", 4}, [ARG_1] = {"newfd", 4},
              [ARG_2] = {"flags", 4},
-     }},
-    {"epoll_create",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"size", 4},
      }},
     {"epoll_create1",
      TEMPLATE_NUM,
@@ -258,7 +202,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"epfd", 4}, [ARG_1] = {"op", 4}, [ARG_2] = {"fd", 4},
              [ARG_3] = {"event", 8},
      }},
-    {"epoll_ctl_old", TEMPLATE_NUM, NORMAL, {}},  // old/Unimplemented system call
     {"epoll_pwait",
      TEMPLATE_NUM,
      NORMAL,
@@ -266,20 +209,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"epfd", 4}, [ARG_1] = {"events", 8},
              [ARG_2] = {"maxevents", 4}, [ARG_3] = {"timeout", 4},
              [ARG_4] = {"sigmask", 8}, [ARG_5] = {"sigsetsize", 8},
-     }},
-    {"epoll_wait",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"epfd", 4}, [ARG_1] = {"events", 8},
-             [ARG_2] = {"maxevents", 4}, [ARG_3] = {"timeout", 4},
-     }},
-    {"epoll_wait_old", TEMPLATE_NUM, NORMAL, {}},  // old/Unimplemented system call
-    {"eventfd",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"count", 4},
      }},
     {"eventfd2",
      TEMPLATE_NUM,
@@ -420,9 +349,8 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"cmd", 4},
      }},
-    {"fork", TEMPLATE_NUM, NORMAL, {}},
     {"fremovexattr",
-     TEMPLATE_NUM,
+     16,
      NORMAL,
      {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"name", 8},
@@ -460,13 +388,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_3] = {"utime", 8}, [ARG_4] = {"uaddr2", 8},
              [ARG_5] = {"val3", 4},
      }},
-    {"futimesat",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"dfd", 4}, [ARG_1] = {"filename", 8},
-             [ARG_2] = {"utimes", 8},
-     }},
     {"getcpu",
      TEMPLATE_NUM,
      NORMAL,
@@ -480,13 +401,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"buf", 8}, [ARG_1] = {"size", 8},
      }},
-    {"getdents",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"fd", 4}, [ARG_1] = {"dirent", 8},
-             [ARG_2] = {"count", 4},
-     }},
     {"getdents64",
      TEMPLATE_NUM,
      NORMAL,
@@ -494,11 +408,11 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"dirent", 8},
              [ARG_2] = {"count", 4},
      }},
-    {"getegid", TEMPLATE_NUM, NORMAL, {}},
-    {"geteuid", TEMPLATE_NUM, NORMAL, {}},
-    {"getgid", TEMPLATE_NUM, NORMAL, {}},
+    {"getegid", 177, NORMAL, {}},
+    {"geteuid", 175, NORMAL, {}},
+    {"getgid", 176, NORMAL, {}},
     {"getgroups",
-     TEMPLATE_NUM,
+     158,
      NORMAL,
      {
              [ARG_0] = {"gidsetsize", 4}, [ARG_1] = {"grouplist", 8},
@@ -509,12 +423,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"which", 4}, [ARG_1] = {"value", 8},
      }},
-    {"get_kernel_syms",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"table", 8},
-     }},  // only in kernels before Linux 2.6
     {"get_mempolicy",
      TEMPLATE_NUM,
      NORMAL,
@@ -536,12 +444,10 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"pid", 4},
      }},
-    {"getpgrp", TEMPLATE_NUM, NORMAL, {}},
-    {"getpid", TEMPLATE_NUM, NORMAL, {}},
-    {"getpmsg", TEMPLATE_NUM, NORMAL, {}},  // Unimplemented system call
-    {"getppid", TEMPLATE_NUM, NORMAL, {}},
+    {"getpid", 172, NORMAL, {}},
+    {"getppid", 173, NORMAL, {}},
     {"getpriority",
-     TEMPLATE_NUM,
+     141,
      NORMAL,
      {
              [ARG_0] = {"which", 4}, [ARG_1] = {"who", 4},
@@ -607,22 +513,16 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_2] = {"optname", 4}, [ARG_3] = {"optval", 8},
              [ARG_4] = {"optlen", 8},
      }},
-    {"get_thread_area",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"u_info", 8},
-     }},
-    {"gettid", TEMPLATE_NUM, NORMAL, {}},
+    {"gettid", 178, NORMAL, {}},
     {"gettimeofday",
-     TEMPLATE_NUM,
+     169,
      NORMAL,
      {
              [ARG_0] = {"tv", 8}, [ARG_1] = {"tz", 8},
      }},
-    {"getuid", TEMPLATE_NUM, NORMAL, {}},
+    {"getuid", 174, NORMAL, {}},
     {"getxattr",
-     TEMPLATE_NUM,
+     8,
      NORMAL,
      {
              [ARG_0] = {"pathname", 8}, [ARG_1] = {"name", 8},
@@ -642,9 +542,8 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"pathname", 8},
              [ARG_2] = {"mask", 4},
      }},
-    {"inotify_init", TEMPLATE_NUM, NORMAL, {}},
     {"inotify_init1",
-     TEMPLATE_NUM,
+     26,
      NORMAL,
      {
              [ARG_0] = {"flags", 4},
@@ -682,19 +581,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_2] = {"nr", 8}, [ARG_3] = {"events", 8},
              [ARG_4] = {"timeout", 8},
      }},
-    {"ioperm",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"from", 8}, [ARG_1] = {"num", 8},
-             [ARG_2] = {"turn_on", 4},
-     }},
-    {"iopl",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"level", 4},
-     }},
     {"ioprio_get",
      TEMPLATE_NUM,
      NORMAL,
@@ -729,14 +615,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_2] = {"type", 4}, [ARG_3] = {"idx1", 8},
              [ARG_4] = {"idx2", 8},
      }},
-    {"kexec_file_load",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"kernel_fd", 4}, [ARG_1] = {"initrd_fd", 4},
-             [ARG_2] = {"cmdline_len", 8}, [ARG_3] = {"cmdline_ptr", 8},
-             [ARG_4] = {"flags", 8},
-     }},
     {"kexec_load",
      TEMPLATE_NUM,
      NORMAL,
@@ -758,25 +636,12 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"pid", 4}, [ARG_1] = {"sig", 4},
      }},
-    {"lchown",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"user", 4},
-             [ARG_2] = {"group", 4},
-     }},
     {"lgetxattr",
      TEMPLATE_NUM,
      NORMAL,
      {
              [ARG_0] = {"pathname", 8}, [ARG_1] = {"name", 8},
              [ARG_2] = {"value", 8}, [ARG_3] = {"size", 8},
-     }},
-    {"link",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"oldname", 8}, [ARG_1] = {"newname", 8},
      }},
     {"linkat",
      TEMPLATE_NUM,
@@ -874,25 +739,12 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"start", 8}, [ARG_1] = {"len", 8}, [ARG_2] = {"vec", 8},
      }},
-    {"mkdir",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"pathname", 8}, [ARG_1] = {"mode", 2},
-     }},
     {"mkdirat",
      TEMPLATE_NUM,
      NORMAL,
      {
              [ARG_0] = {"dfd", 4}, [ARG_1] = {"pathname", 8},
              [ARG_2] = {"mode", 2},
-     }},
-    {"mknod",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"mode", 2},
-             [ARG_2] = {"dev", 4},
      }},
     {"mknodat",
      TEMPLATE_NUM,
@@ -926,13 +778,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"addr", 8}, [ARG_1] = {"len", 8}, [ARG_2] = {"prot", 8},
              [ARG_3] = {"flags", 8}, [ARG_4] = {"fd", 8}, [ARG_5] = {"off", 8},
-     }},
-    {"modify_ldt",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"func", 4}, [ARG_1] = {"ptr", 8},
-             [ARG_2] = {"bytecount", 8},
      }},
     {"mount",
      TEMPLATE_NUM,
@@ -1047,9 +892,9 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"start", 8}, [ARG_1] = {"len", 8},
      }},
-    {"munlockall", TEMPLATE_NUM, NORMAL, {}},
+    {"munlockall", 231, NORMAL, {}},
     {"munmap",
-     TEMPLATE_NUM,
+     215,
      NORMAL,
      {
              [ARG_0] = {"addr", 8}, [ARG_1] = {"len", 8},
@@ -1068,14 +913,8 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"rqtp", 8}, [ARG_1] = {"rmtp", 8},
      }},
-    {"fstat",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"fd", 4}, [ARG_1] = {"statbuf", 8},
-     }},
     {"newfstat",
-     TEMPLATE_NUM,
+     80,
      NORMAL,
      {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"statbuf", 8},
@@ -1087,38 +926,8 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"dfd", 4}, [ARG_1] = {"filename", 8},
              [ARG_2] = {"statbuf", 8}, [ARG_3] = {"flag", 4},
      }},
-    {"newlstat",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"statbuf", 8},
-     }},
-    {"lstat",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"statbuf", 8},
-     }},
-    {"newstat",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"statbuf", 8},
-     }},
-    {"stat",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"statbuf", 8},
-     }},
     {"newuname",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"name", 8},
-     }},
-    {"uname",
-     TEMPLATE_NUM,
+     160,
      NORMAL,
      {
              [ARG_0] = {"name", 8},
@@ -1128,13 +937,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      NORMAL,
      {
              [ARG_0] = {"cmd", 4}, [ARG_1] = {"argp", 8}, [ARG_2] = {"resp", 8},
-     }},  // only in kernels before Linux 3.1
-    {"open",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"flags", 4},
-             [ARG_2] = {"mode", 2},
      }},
     {"openat",
      TEMPLATE_NUM,
@@ -1150,9 +952,8 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"mountdirfd", 4}, [ARG_1] = {"handle", 8},
              [ARG_2] = {"flags", 4},
      }},
-    {"pause", TEMPLATE_NUM, NORMAL, {}},
     {"perf_event_open",
-     TEMPLATE_NUM,
+     241,
      NORMAL,
      {
              [ARG_0] = {"attr_uptr", 8}, [ARG_1] = {"pid", 4},
@@ -1165,12 +966,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"personality", 4},
      }},
-    {"pipe",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"fildes", 8},
-     }},
     {"pipe2",
      TEMPLATE_NUM,
      NORMAL,
@@ -1182,13 +977,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      NORMAL,
      {
              [ARG_0] = {"new_root", 8}, [ARG_1] = {"put_old", 8},
-     }},
-    {"poll",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"ufds", 8}, [ARG_1] = {"nfds", 4},
-             [ARG_2] = {"timeout_msecs", 4},
      }},
     {"ppoll",
      TEMPLATE_NUM,
@@ -1220,7 +1008,7 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_3] = {"pos_l", 8}, [ARG_4] = {"pos_h", 8},
      }},
     {"preadv2",
-     TEMPLATE_NUM,
+     286,
      NORMAL,
      {
              [ARG_0] = {"fd", 8}, [ARG_1] = {"vec", 8}, [ARG_2] = {"vlen", 8},
@@ -1264,7 +1052,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"request", 8}, [ARG_1] = {"pid", 8},
              [ARG_2] = {"addr", 8}, [ARG_3] = {"data", 8},
      }},
-    {"putpmsg", TEMPLATE_NUM, NORMAL, {}},  // Unimplemented system call
     {"pwrite64",
      TEMPLATE_NUM,
      NORMAL,
@@ -1280,21 +1067,13 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_3] = {"pos_l", 8}, [ARG_4] = {"pos_h", 8},
      }},
     {"pwritev2",
-     TEMPLATE_NUM,
+     287,
      NORMAL,
      {
              [ARG_0] = {"fd", 8}, [ARG_1] = {"vec", 8}, [ARG_2] = {"vlen", 8},
              [ARG_3] = {"pos_l", 8}, [ARG_4] = {"pos_h", 8},
              [ARG_5] = {"flags", 4},
      }},
-    {"query_module",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"name", 8}, [ARG_1] = {"which", 4},
-             [ARG_2] = {"buf", 8}, [ARG_3] = {"bufsize", 8},
-             [ARG_4] = {"ret", 8},
-     }},  // only in kernels before Linux 2.6
     {"quotactl",
      TEMPLATE_NUM,
      NORMAL,
@@ -1314,13 +1093,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"offset", 8},
              [ARG_2] = {"count", 8},
-     }},
-    {"readlink",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"path", 8}, [ARG_1] = {"buf", 8},
-             [ARG_2] = {"bufsiz", 4},
      }},
     {"readlinkat",
      TEMPLATE_NUM,
@@ -1377,12 +1149,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"pathname", 8}, [ARG_1] = {"name", 8},
      }},
-    {"rename",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"oldname", 8}, [ARG_1] = {"newname", 8},
-     }},
     {"renameat",
      TEMPLATE_NUM,
      NORMAL,
@@ -1405,13 +1171,7 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"_type", 8}, [ARG_1] = {"_description", 8},
              [ARG_2] = {"_callout_info", 8}, [ARG_3] = {"destringid", 4},
      }},
-    {"restart_syscall", TEMPLATE_NUM, NORMAL, {}},
-    {"rmdir",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"pathname", 8},
-     }},
+    {"restart_syscall", 128, NORMAL, {}},
     {"rt_sigaction",
      TEMPLATE_NUM,
      NORMAL,
@@ -1438,9 +1198,9 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"pid", 4}, [ARG_1] = {"sig", 4}, [ARG_2] = {"uinfo", 8},
      }},
-    {"rt_sigreturn", TEMPLATE_NUM, NORMAL, {}},
+    {"rt_sigreturn", 139, NORMAL, {}},
     {"rt_sigsuspend",
-     TEMPLATE_NUM,
+     133,
      NORMAL,
      {
              [ARG_0] = {"unewset", 8}, [ARG_1] = {"sigsetsize", 8},
@@ -1530,35 +1290,13 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"pid", 4}, [ARG_1] = {"policy", 4},
              [ARG_2] = {"param", 8},
      }},
-    {"sched_yield", TEMPLATE_NUM, NORMAL, {}},
+    {"sched_yield", 124, NORMAL, {}},
     {"seccomp",
-     TEMPLATE_NUM,
+     277,
      NORMAL,
      {
              [ARG_0] = {"op", 4}, [ARG_1] = {"flags", 4},
              [ARG_2] = {"uargs", 8},
-     }},
-    {"security", TEMPLATE_NUM, NORMAL, {}},  // Unimplemented system call
-    {"select",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"n", 4}, [ARG_1] = {"inp", 8}, [ARG_2] = {"outp", 8},
-             [ARG_3] = {"exp", 8}, [ARG_4] = {"tvp", 8},
-     }},
-    {"newselect",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"n", 4}, [ARG_1] = {"inp", 8}, [ARG_2] = {"outp", 8},
-             [ARG_3] = {"exp", 8}, [ARG_4] = {"tvp", 8},
-     }},
-    {"_newselect",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"n", 4}, [ARG_1] = {"inp", 8}, [ARG_2] = {"outp", 8},
-             [ARG_3] = {"exp", 8}, [ARG_4] = {"tvp", 8},
      }},
     {"semctl",
      TEMPLATE_NUM,
@@ -1589,14 +1327,7 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_2] = {"nsops", 4}, [ARG_3] = {"timeout", 8},
      }},
     {"sendfile",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"out_fd", 4}, [ARG_1] = {"in_fd", 4},
-             [ARG_2] = {"offset", 4}, [ARG_3] = {"count", 4},
-     }},
-    {"sendfile64",
-     TEMPLATE_NUM,
+     71,
      NORMAL,
      {
              [ARG_0] = {"out_fd", 4}, [ARG_1] = {"in_fd", 4},
@@ -1730,20 +1461,14 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"head", 8}, [ARG_1] = {"len", 8},
      }},
-    {"setsid", TEMPLATE_NUM, NORMAL, {}},
+    {"setsid", 157, NORMAL, {}},
     {"setsockopt",
-     TEMPLATE_NUM,
+     208,
      NORMAL,
      {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"level", 4},
              [ARG_2] = {"optname", 4}, [ARG_3] = {"optval", 8},
              [ARG_4] = {"optlen", 4},
-     }},
-    {"set_thread_area",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"u_info", 8},
      }},
     {"set_tid_address",
      TEMPLATE_NUM,
@@ -1809,13 +1534,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"uss", 8}, [ARG_1] = {"uoss", 8},
      }},
-    {"signalfd",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"ufd", 4}, [ARG_1] = {"user_mask", 8},
-             [ARG_2] = {"sizemask", 8},
-     }},
     {"signalfd4",
      TEMPLATE_NUM,
      NORMAL,
@@ -1863,12 +1581,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"specialfile", 8}, [ARG_1] = {"swap_flags", 4},
      }},
-    {"symlink",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"oldname", 8}, [ARG_1] = {"newname", 8},
-     }},
     {"symlinkat",
      TEMPLATE_NUM,
      NORMAL,
@@ -1876,9 +1588,9 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"oldname", 8}, [ARG_1] = {"newdfd", 4},
              [ARG_2] = {"newname", 8},
      }},
-    {"sync", TEMPLATE_NUM, NORMAL, {}},
-    {"sync_file_range",
-     TEMPLATE_NUM,
+    {"sync", 81, NORMAL, {}},
+    {"sync_file_range2",
+     84,
      NORMAL,
      {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"offset", 8},
@@ -1889,25 +1601,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      NORMAL,
      {
              [ARG_0] = {"fd", 4},
-     }},
-    {"sysctl",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"args", 8},
-     }},
-    {"_sysctl",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"args", 8},
-     }},
-    {"sysfs",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"option", 4}, [ARG_1] = {"arg1", 8},
-             [ARG_2] = {"arg2", 8},
      }},
     {"sysinfo",
      TEMPLATE_NUM,
@@ -1933,12 +1626,6 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      NORMAL,
      {
              [ARG_0] = {"tgid", 4}, [ARG_1] = {"pid", 4}, [ARG_2] = {"sig", 4},
-     }},
-    {"time",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"tloc", 8},
      }},
     {"timer_create",
      TEMPLATE_NUM,
@@ -2009,30 +1696,11 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"path", 8}, [ARG_1] = {"length", 8},
      }},
-    {"tuxcall", TEMPLATE_NUM, NORMAL, {}},  // Unimplemented system call
     {"umask",
      TEMPLATE_NUM,
      NORMAL,
      {
              [ARG_0] = {"mask", 4},
-     }},
-    {"umount",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"name", 8}, [ARG_1] = {"flags", 4},
-     }},
-    {"umount2",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"name", 8}, [ARG_1] = {"flags", 4},
-     }},
-    {"unlink",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"pathname", 8},
      }},
     {"unlinkat",
      TEMPLATE_NUM,
@@ -2047,29 +1715,11 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      {
              [ARG_0] = {"unshare_flags", 8},
      }},
-    {"uselib",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"library", 8},
-     }},
     {"userfaultfd",
      TEMPLATE_NUM,
      NORMAL,
      {
              [ARG_0] = {"flags", 4},
-     }},
-    {"ustat",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"dev", 4}, [ARG_1] = {"ubuf", 8},
-     }},
-    {"utime",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"times", 8},
      }},
     {"utimensat",
      TEMPLATE_NUM,
@@ -2078,27 +1728,13 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_0] = {"dfd", 4}, [ARG_1] = {"filename", 8},
              [ARG_2] = {"utimes", 8}, [ARG_3] = {"flags", 4},
      }},
-    {"utimes",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"filename", 8}, [ARG_1] = {"utimes", 8},
-     }},
-    {"vfork", TEMPLATE_NUM, NORMAL, {}},
-    {"vhangup", TEMPLATE_NUM, NORMAL, {}},
+    {"vhangup", 58, NORMAL, {}},
     {"vmsplice",
      TEMPLATE_NUM,
      NORMAL,
      {
              [ARG_0] = {"fd", 4}, [ARG_1] = {"iov", 8},
              [ARG_2] = {"nr_segs", 8}, [ARG_3] = {"flags", 4},
-     }},
-    {"vserver", TEMPLATE_NUM, NORMAL, {}},  // Unimplemented system call
-    {"write",
-     TEMPLATE_NUM,
-     NORMAL,
-     {
-             [ARG_0] = {"fd", 4}, [ARG_1] = {"buf", 4}, [ARG_2] = {"count", 4},
      }},
     {"wait4",
      TEMPLATE_NUM,
@@ -2115,6 +1751,12 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
              [ARG_2] = {"infop", 8}, [ARG_3] = {"options", 4},
              [ARG_4] = {"ru", 8},
      }},
+    {"write",
+     TEMPLATE_NUM,
+     NORMAL,
+     {
+             [ARG_0] = {"fd", 4}, [ARG_1] = {"buf", 8}, [ARG_2] = {"count", 8},
+     }},
     {"writev",
      TEMPLATE_NUM,
      NORMAL,
@@ -2123,5 +1765,5 @@ const struct syscall_descriptor TEMPLATE_ARCH_syscall_list[] = {
      }},
 };
 
-const size_t TEMPALTE_ARCH_syscall_list_size =
-    sizeof(TEMPALTE_ARCH_syscall_list) / sizeof(TEMPALTE_ARCH_syscall_list[0]);
+const size_t TEMPLATE_ARCH_syscall_list_size =
+    sizeof(TEMPLATE_ARCH_syscall_list) / sizeof(TEMPLATE_ARCH_syscall_list[0]);
