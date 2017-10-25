@@ -57,6 +57,7 @@ arc = sys.argv[2]
 content  = content.replace("TEMPLATE_ARCH", arc)
 
 found = notfound = 0
+lstNF = "//List of syscalls that are not found in the template"
 for syscall in sorted(syscalls.keys()):
     #print(syscall)
     regex = ""
@@ -72,12 +73,15 @@ for syscall in sorted(syscalls.keys()):
     if  new_content is content :
         print("Syscall not found in the template:", syscall)
         notfound= notfound + 1
+        lstNF = lstNF + "\n//" +  syscall 
     else : 
         print("Found:", syscall)
         found =found + 1
     content  = new_content
 
-print("Syscall found:", found)
-print("Syscall not found", notfound)
+print("found:", found)
+print("not found", notfound)
+print(lstNF)
 output_file = open(arc + '_syscalls.c', 'w')
 output_file.write(content)
+output_file.write(lstNF)
